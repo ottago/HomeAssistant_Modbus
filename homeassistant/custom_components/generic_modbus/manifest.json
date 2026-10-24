@@ -1,0 +1,13 @@
+{
+  "domain": "generic_modbus",
+  "name": "Generic Modbus RTL Device Integration",
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/generic-modbus/integration",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "requirements": ["pyserial>=3.5"],
+  "version": "1.0.0",
+  "issue_tracker": "https://github.com/generic-modbus/integration/issues"
+}

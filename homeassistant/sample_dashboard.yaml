@@ -1,0 +1,188 @@
+# Sample Home Assistant Dashboard for Tracer Solar Charger
+# Copy this to your dashboard configuration or use as reference
+
+title: Solar Charger Dashboard
+path: solar-charger
+icon: mdi:solar-power
+cards:
+  # Overview Row
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        entity: sensor.solar_charger_battery_state_of_charge
+        name: Battery Level
+        min: 0
+        max: 100
+        severity:
+          green: 60
+          yellow: 30
+          red: 0
+        needle: true
+      
+      - type: gauge
+        entity: sensor.solar_charger_pv_power
+        name: Solar Power
+        min: 0
+        max: 400
+        severity:
+          green: 200
+          yellow: 100
+          red: 0
+        needle: true
+      
+      - type: gauge
+        entity: sensor.solar_charger_load_power
+        name: Load Power
+        min: 0
+        max: 200
+        severity:
+          red: 150
+          yellow: 100
+          green: 0
+        needle: true
+
+  # Current Status
+  - type: entities
+    title: Current Status
+    entities:
+      - entity: sensor.solar_charger_pv_voltage
+        name: Solar Voltage
+        icon: mdi:solar-panel
+      - entity: sensor.solar_charger_pv_current
+        name: Solar Current
+        icon: mdi:current-dc
+      - entity: sensor.solar_charger_battery_voltage
+        name: Battery Voltage
+        icon: mdi:battery
+      - entity: sensor.solar_charger_battery_current
+        name: Battery Current
+        icon: mdi:current-dc
+      - entity: sensor.solar_charger_load_voltage
+        name: Load Voltage
+        icon: mdi:flash
+      - entity: sensor.solar_charger_load_current
+        name: Load Current
+        icon: mdi:current-ac
+
+  # System Status
+  - type: entities
+    title: System Status
+    entities:
+      - entity: sensor.solar_charger_battery_status
+        name: Battery Status
+        icon: mdi:battery-alert
+      - entity: sensor.solar_charger_charging_status
+        name: Charging Status
+        icon: mdi:battery-charging
+      - entity: sensor.solar_charger_load_status
+        name: Load Status
+        icon: mdi:power-plug
+      - entity: sensor.solar_charger_device_temperature
+        name: Controller Temperature
+        icon: mdi:thermometer
+      - entity: sensor.solar_charger_battery_temperature
+        name: Battery Temperature
+        icon: mdi:thermometer
+
+  # Energy Statistics
+  - type: statistics-graph
+    title: Daily Energy
+    entities:
+      - sensor.solar_charger_energy_generated_today
+      - sensor.solar_charger_energy_consumed_today
+    period: day
+    stat_types:
+      - max
+
+  # Historical Charts
+  - type: history-graph
+    title: Power Generation (24h)
+    entities:
+      - entity: sensor.solar_charger_pv_power
+        name: Solar Power
+      - entity: sensor.solar_charger_battery_power
+        name: Battery Power
+      - entity: sensor.solar_charger_load_power
+        name: Load Power
+    hours_to_show: 24
+    refresh_interval: 60
+
+  - type: history-graph
+    title: Battery Monitoring (24h)
+    entities:
+      - entity: sensor.solar_charger_battery_voltage
+        name: Battery Voltage
+      - entity: sensor.solar_charger_battery_state_of_charge
+        name: Battery SOC
+    hours_to_show: 24
+    refresh_interval: 60
+
+  # Configuration Info
+  - type: entities
+    title: Configuration
+    entities:
+      - entity: sensor.solar_charger_battery_type
+        name: Battery Type
+        icon: mdi:battery-outline
+      - entity: sensor.solar_charger_battery_capacity
+        name: Battery Capacity
+        icon: mdi:battery-outline
+      - entity: sensor.solar_charger_float_voltage_setting
+        name: Float Voltage
+        icon: mdi:sine-wave
+      - entity: sensor.solar_charger_low_voltage_disconnect_setting
+        name: Low Voltage Disconnect
+        icon: mdi:battery-alert-variant
+
+  # Statistics Summary
+  - type: entities
+    title: Lifetime Statistics
+    entities:
+      - entity: sensor.solar_charger_total_energy_generated
+        name: Total Energy Generated
+        icon: mdi:counter
+      - entity: sensor.solar_charger_battery_full_charges
+        name: Battery Cycles
+        icon: mdi:battery-sync
+      - entity: sensor.solar_charger_operating_days
+        name: Operating Days
+        icon: mdi:calendar-clock
+      - entity: sensor.solar_charger_max_battery_voltage_today
+        name: Max Battery Voltage Today
+        icon: mdi:battery-arrow-up
+      - entity: sensor.solar_charger_min_battery_voltage_today
+        name: Min Battery Voltage Today
+        icon: mdi:battery-arrow-down
+
+  # Mini Graph Cards (if you have mini-graph-card installed)
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.solar_charger_pv_power
+        name: Solar Power
+        icon: mdi:solar-power
+        hours_to_show: 12
+        points_per_hour: 4
+        line_color: orange
+        fill: fade
+        
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.solar_charger_battery_voltage
+        name: Battery Voltage
+        icon: mdi:battery
+        hours_to_show: 12
+        points_per_hour: 4
+        line_color: green
+        fill: fade
+        
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.solar_charger_load_power
+        name: Load Power
+        icon: mdi:lightning-bolt
+        hours_to_show: 12
+        points_per_hour: 4
+        line_color: blue
+        fill: fade

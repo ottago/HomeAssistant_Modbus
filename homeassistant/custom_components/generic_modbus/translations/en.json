@@ -1,0 +1,383 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Generic Modbus Device Setup",
+        "description": "Configure connection to your Modbus RTU device",
+        "data": {
+          "device_path": "Serial Device Path",
+          "baudrate": "Baud Rate",
+          "timeout": "Timeout (seconds)",
+          "parity": "Parity",
+          "stopbits": "Stop Bits",
+          "bytesize": "Data Bits",
+          "discovery_enabled": "Enable Auto-Discovery",
+          "slave_id_range": "Discovery Range",
+          "advanced_config": "Configure Advanced Settings"
+        },
+        "data_description": {
+          "device_path": "Path to the serial device (e.g., /dev/ttyUSB0, /dev/ttyAMA0, COM1)",
+          "baudrate": "Communication speed - usually 115200 for modern devices",
+          "timeout": "Response timeout in seconds (0.1-30.0)",
+          "parity": "Error checking - usually None",
+          "stopbits": "Stop bits - usually 1",
+          "bytesize": "Data bits - usually 8",
+          "discovery_enabled": "Automatically scan for devices on the network",
+          "slave_id_range": "Slave IDs to scan when auto-discovery is enabled (e.g., '1-10' or '1'). Ignored if auto-discovery is disabled.",
+          "advanced_config": "Configure binary sensor detection, scan ranges, and other advanced settings"
+        }
+      },
+      "discovery": {
+        "title": "Device Discovery",
+        "description": "{message}",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "selected_device": "Choose from automatically discovered devices",
+          "manual_config": "Skip discovery and configure device manually"
+        },
+        "progress_action": "discovery_progress"
+      },
+      "discovery_results": {
+        "title": "Discovery Complete",
+        "description": "Found {device_count} Modbus device(s). Select a device to configure or choose manual setup.",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "selected_device": "Choose from automatically discovered devices",
+          "manual_config": "Skip discovery and configure device manually"
+        }
+      },
+      "discovery_empty": {
+        "title": "No Devices Found",
+        "description": "No Modbus devices were found during discovery.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Continue with manual device configuration"
+        }
+      },
+      "discovery_failed": {
+        "title": "Discovery Failed",
+        "description": "Device discovery encountered an error.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Continue with manual device configuration"
+        }
+      },
+      "device_selection": {
+        "title": "Select Modbus Device",
+        "description": "{message}\n\n**Stability Levels:**\n{stability_help}\n\n💡 **Recommendation:** Choose devices with 🟢 High stability for best reliability.",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "selected_device": "Choose from discovered Modbus devices",
+          "manual_config": "Skip selection and configure device manually"
+        }
+      },
+      "discovery_cancelled": {
+        "title": "Discovery Cancelled",
+        "description": "Device discovery was cancelled by the user.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Continue with manual device configuration"
+        }
+      },
+      "discovery_results": {
+        "title": "Discovery Results",
+        "description": "{message}",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "selected_device": "Choose from automatically discovered devices",
+          "manual_config": "Skip discovery and configure device manually"
+        }
+      },
+      "discovery_no_devices": {
+        "title": "No Devices Found",
+        "description": "{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Continue with manual device configuration"
+        }
+      },
+      "discovery_failed": {
+        "title": "Discovery Failed",
+        "description": "Device discovery encountered an error.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Continue with manual device configuration"
+        }
+      },
+      "device_config": {
+        "title": "Device Configuration",
+        "description": "Configure your Modbus device: {device_name} (Slave ID: {slave_id})",
+        "data": {
+          "device_name": "Device Name",
+          "slave_id": "Slave ID",
+          "update_interval": "Update Interval (seconds)",
+          "configure_parameters": "Configure Individual Parameters"
+        },
+        "data_description": {
+          "device_name": "Friendly name for this device in Home Assistant",
+          "slave_id": "Modbus slave ID (1-247) - must match device configuration",
+          "update_interval": "How often to poll the device for updates (5-300 seconds)",
+          "configure_parameters": "Set up binary sensor detection and update intervals for individual parameters"
+        }
+      },
+      "summary": {
+        "title": "Configuration Summary",
+        "description": "Review your Modbus device configuration:\n\n**Device:** {device_name}\n**Path:** {device_path}\n**Slave ID:** {slave_id}\n**Profile:** {device_profile}\n**Parameters:** {parameter_count} discovered\n**Stability:** {stability_info}\n\nClick 'Submit' to create the device.",
+        "data": {
+          "confirm": "Create Device"
+        },
+        "data_description": {
+          "confirm": "Confirm and create the Modbus device with these settings"
+        }
+      },
+      "advanced_config": {
+        "title": "Advanced Device Configuration",
+        "description": "Configure advanced settings for device discovery and binary sensor detection. Current keywords: {current_keywords}",
+        "data": {
+          "binary_keywords": "Binary Sensor Keywords",
+          "scan_batch_size": "Scan Batch Size",
+          "scan_delay": "Scan Delay (seconds)",
+          "slave_range_start": "Slave Range Start",
+          "slave_range_end": "Slave Range End"
+        },
+        "data_description": {
+          "binary_keywords": "Comma-separated keywords that indicate a parameter should be a binary sensor (e.g., 'status,alarm,fault,error')",
+          "scan_batch_size": "Number of registers to scan in each batch (1-50, current: {current_batch_size})",
+          "scan_delay": "Delay between register scans in seconds (0.1-5.0, current: {current_delay})",
+          "slave_range_start": "Starting slave ID for discovery scans",
+          "slave_range_end": "Ending slave ID for discovery scans"
+        }
+      },
+      "parameter_config": {
+        "title": "Parameter Configuration",
+        "description": "Configure individual parameters for your device. Showing {showing_count} of {parameter_count} parameters.",
+        "data": {},
+        "data_description": {}
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the Modbus device. Check your connection settings.",
+      "invalid_device": "Invalid device configuration.",
+      "no_devices_found": "No Modbus devices found during discovery. Try manual configuration.",
+      "device_timeout": "Device connection timed out. Check device path and settings.",
+      "invalid_keywords": "Invalid binary sensor keywords. Use comma-separated values.",
+      "invalid_range": "Invalid slave ID range. Start must be less than end."
+    },
+    "abort": {
+      "already_configured": "This device is already configured.",
+      "no_coordinator": "Device coordinator not found."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Generic Modbus Options",
+        "description": "Configure parameters for your Modbus device. Found {parameter_count} parameters.",
+        "data": {
+          "update_interval": "Update Interval (seconds)",
+          "reconfigure_binary_sensors": "Reconfigure Binary Sensors",
+          "reconfigure_discovery": "Reconfigure Discovery Settings"
+        },
+        "data_description": {
+          "update_interval": "Global update interval for all parameters",
+          "reconfigure_binary_sensors": "Modify binary sensor detection keywords and overrides",
+          "reconfigure_discovery": "Modify discovery scan ranges and timing"
+        }
+      },
+      "binary_sensors": {
+        "title": "Binary Sensor Configuration",
+        "description": "Configure which parameters should be treated as binary sensors",
+        "data": {
+          "binary_keywords": "Binary Sensor Keywords"
+        },
+        "data_description": {
+          "binary_keywords": "Comma-separated keywords for binary sensor detection"
+        }
+      },
+      "discovery_settings": {
+        "title": "Discovery Settings",
+        "description": "Configure device discovery parameters",
+        "data": {
+          "scan_batch_size": "Scan Batch Size",
+          "scan_delay": "Scan Delay (seconds)",
+          "slave_range": "Slave ID Range"
+        },
+        "data_description": {
+          "scan_batch_size": "Registers to scan per batch",
+          "scan_delay": "Delay between scans",
+          "slave_range": "Range of slave IDs to scan (e.g., '1-10')"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure Modbus Device",
+        "description": "Choose what you want to configure for **{device_name}**\n\nCurrent device: {current_path}",
+        "data": {
+          "configure_device": "Update Device Connection",
+          "configure_parameters": "Configure Parameters"
+        },
+        "data_description": {
+          "configure_device": "Change which device this integration connects to",
+          "configure_parameters": "Adjust scaling, offset, and enable/disable parameters"
+        }
+      },
+      "device_reconfiguration": {
+        "title": "Update Device Connection",
+        "description": "**Current Device:** {current_device}\n**Stability:** {current_stability}\n**Path:** {current_path}\n\nChoose how to select a new device:",
+        "data": {
+          "discover_devices": "Discover Available Devices",
+          "manual_path": "Enter Device Path Manually",
+          "device_path": "Device Path",
+          "slave_id": "Slave ID"
+        },
+        "data_description": {
+          "discover_devices": "Scan for available Modbus devices with match detection",
+          "manual_path": "Manually specify the device path and slave ID",
+          "device_path": "Full path to the serial device (e.g., /dev/ttyUSB0)",
+          "slave_id": "Modbus slave ID (1-247) - leave empty to keep current"
+        }
+      },
+      "device_discovery": {
+        "title": "Select Replacement Device",
+        "description": "{message}\n\n**Match Indicators:**\n🎯 Exact match - Very likely the same device\n✅ Likely match - Probably the same device\n❓ Possible match - Could be the same device",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "selected_device": "Choose from discovered devices",
+          "manual_config": "Return to manual device path entry"
+        }
+      },
+      "device_confirmation": {
+        "title": "Confirm Device Change",
+        "description": "**Current Device:** {current_device}\n\n**New Device:** {new_device}\n**Stability:** {new_stability}\n**Path:** {new_path}\n**Slave ID:** {new_slave_id}\n\n{warnings}\n\n⚠️ **Important:** This will only update the device connection. All other settings (parameters, intervals, device name, etc.) will remain unchanged.",
+        "data": {
+          "confirm_change": "Update Device Connection"
+        },
+        "data_description": {
+          "confirm_change": "Confirm and apply the device change"
+        }
+      },
+      "parameter_config": {
+        "title": "Configure Parameters",
+        "description": "{message}",
+        "data_description": {
+          "scale_": "Scaling factor applied to raw values (multiply)",
+          "offset_": "Offset added to scaled values (add after scaling)",
+          "enabled_": "Enable or disable this parameter"
+        }
+      }
+    },
+    "error": {
+      "device_validation_failed": "Device validation failed",
+      "update_failed": "Failed to update device connection",
+      "discovery_failed": "Device discovery failed"
+    }
+  },
+  "services": {
+    "discover_devices": {
+      "name": "Discover Devices",
+      "description": "Manually trigger device discovery on the Modbus network"
+    },
+    "read_parameter": {
+      "name": "Read Parameter",
+      "description": "Read a specific parameter from a Modbus device"
+    },
+    "write_register": {
+      "name": "Write Register",
+      "description": "Write a value to a Modbus register"
+    },
+    "export_device_config": {
+      "name": "Export Device Configuration",
+      "description": "Export device configuration to a file"
+    },
+    "import_device_config": {
+      "name": "Import Device Configuration",
+      "description": "Import device configuration from a file"
+    },
+    "update_binary_keywords": {
+      "name": "Update Binary Keywords",
+      "description": "Update binary sensor detection keywords for a device"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "pv_voltage": {
+        "name": "PV Voltage"
+      },
+      "pv_current": {
+        "name": "PV Current"
+      },
+      "pv_power": {
+        "name": "PV Power"
+      },
+      "battery_voltage": {
+        "name": "Battery Voltage"
+      },
+      "battery_current": {
+        "name": "Battery Current"
+      },
+      "battery_power": {
+        "name": "Battery Power"
+      },
+      "battery_soc": {
+        "name": "Battery State of Charge"
+      },
+      "battery_temp": {
+        "name": "Battery Temperature"
+      },
+      "load_voltage": {
+        "name": "Load Voltage"
+      },
+      "load_current": {
+        "name": "Load Current"
+      },
+      "load_power": {
+        "name": "Load Power"
+      },
+      "device_temp": {
+        "name": "Device Temperature"
+      }
+    },
+    "binary_sensor": {
+      "charging_status": {
+        "name": "Charging Status"
+      },
+      "load_status": {
+        "name": "Load Status"
+      },
+      "battery_status": {
+        "name": "Battery Status"
+      },
+      "fault_status": {
+        "name": "Fault Status"
+      }
+    }
+  }
+}

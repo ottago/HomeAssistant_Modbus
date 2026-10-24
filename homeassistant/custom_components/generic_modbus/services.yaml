@@ -1,0 +1,116 @@
+discover_devices:
+  name: Discover Modbus Devices
+  description: Scan for Modbus devices on the specified serial port
+  fields:
+    device_path:
+      name: Device Path
+      description: Serial device path (e.g., /dev/ttyUSB0)
+      required: true
+      selector:
+        text:
+    baudrate:
+      name: Baud Rate
+      description: Serial communication baud rate
+      default: 115200
+      selector:
+        select:
+          options:
+            - 9600
+            - 19200
+            - 38400
+            - 57600
+            - 115200
+    slave_id_range:
+      name: Slave ID Range
+      description: Range of slave IDs to scan (e.g., "1-10" or "1")
+      default: "1-10"
+      selector:
+        text:
+
+update_parameter_scaling:
+  name: Update Parameter Scaling
+  description: Update scaling and offset values for a Modbus parameter
+  target:
+    entity:
+      domain: sensor
+      integration: generic_modbus
+  fields:
+    scale:
+      name: Scale Factor
+      description: Scaling factor to multiply raw values
+      required: false
+      selector:
+        number:
+          min: 0.001
+          max: 1000.0
+          step: 0.001
+          mode: box
+    offset:
+      name: Offset
+      description: Offset to add after scaling
+      required: false
+      selector:
+        number:
+          min: -1000.0
+          max: 1000.0
+          step: 0.1
+          mode: box
+    enabled:
+      name: Enabled
+      description: Enable or disable this parameter
+      required: false
+      selector:
+        boolean:
+
+read_parameter:
+  name: Read Modbus Parameter
+  description: Read a specific parameter from a Modbus device
+  target:
+    entity:
+      domain: sensor
+      integration: generic_modbus
+  fields:
+    parameter_name:
+      name: Parameter Name
+      description: Name of the parameter to read
+      required: true
+      selector:
+        text:
+
+write_register:
+  name: Write Modbus Register
+  description: Write a value to a Modbus register
+  target:
+    entity:
+      domain: sensor
+      integration: generic_modbus
+  fields:
+    register_address:
+      name: Register Address
+      description: Modbus register address (decimal or hex with 0x prefix)
+      required: true
+      selector:
+        text:
+    value:
+      name: Value
+      description: Value to write to the register
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 65535
+          mode: box
+
+export_device_config:
+  name: Export Device Configuration
+  description: Export device configuration to a JSON file
+  target:
+    entity:
+      domain: sensor
+      integration: generic_modbus
+  fields:
+    filename:
+      name: Filename
+      description: Name of the file to export (optional)
+      selector:
+        text:

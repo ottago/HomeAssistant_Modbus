@@ -1,0 +1,45 @@
+{
+  "config": {
+    "step": {
+      "discovery_scan": {
+        "title": "Scanning for Modbus Devices",
+        "description": "Progress: {progress}% complete\n\nStatus: {status}\n\nTested: {tested_count}/{total_count} slave IDs\nFound: {found_count} responsive devices",
+        "data": {
+          "continue_scan": "Continue Scanning",
+          "stop_scan": "Stop and Use Found Devices"
+        },
+        "data_description": {
+          "continue_scan": "Continue testing the next slave ID",
+          "stop_scan": "Stop scanning and proceed with devices found so far"
+        }
+      },
+      "discovery_progress": {
+        "title": "Discovering Modbus Devices",
+        "description": "Please wait while we scan for devices...\n\n{status}",
+        "progress_action": "discovery_progress"
+      },
+      "discovery_results": {
+        "title": "Discovery Complete",
+        "description": "Found {device_count} Modbus device(s). Select a device to configure or choose manual setup.",
+        "data": {
+          "selected_device": "Select Device",
+          "manual_config": "Manual Configuration"
+        }
+      },
+      "discovery_empty": {
+        "title": "No Devices Found",
+        "description": "No Modbus devices were found during discovery.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        }
+      },
+      "discovery_failed": {
+        "title": "Discovery Failed",
+        "description": "Device discovery encountered an error.\n\n{message}",
+        "data": {
+          "manual_config": "Proceed with Manual Configuration"
+        }
+      }
+    }
+  }
+}
